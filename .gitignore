@@ -1,1 +1,28 @@
 .ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# ML artifacts (large binary files)
+ml/models/*.pkl
+
+# Node
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# Environment
+.env
+.env.local
+backend/.env
+frontend/.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cache
+cache/
