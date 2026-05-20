@@ -1,1 +1,31 @@
 .ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# ML artifacts: tracked via Git LFS (see .gitattributes) so they ship to the
+# backend host. Do NOT re-ignore these or the deployed API will have no models.
+
+# Node
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# Environment
+.env
+.env.local
+backend/.env
+frontend/.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cache
+cache/
+
+# Local Claude Code agent state
+.claude/

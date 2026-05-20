@@ -1,0 +1,26 @@
+# Render Blueprint for the Calgary Crime Forecast backend (FastAPI + scikit-learn).
+# Deploy: push this repo to GitHub, then in Render -> New -> Blueprint, point it
+# at the repo. Render reads this file and provisions the service below.
+#
+# Render fetches Git LFS objects on clone, so the models tracked in .gitattributes
+# (ml/models/*.pkl) are pulled in and baked into the image by backend/Dockerfile.
+
+services:
+  - type: web
+    name: crime-forecast-api
+    runtime: docker
+    dockerfilePath: backend/Dockerfile
+    dockerContext: .          # build context = repo root, so ml/models is available
+    plan: free                # free tier spins down when idle (slow first request)
+    region: oregon
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      # Set this to your deployed Vercel URL after the frontend is live, e.g.
+      # https://your-app.vercel.app  (comma-separate multiple origins).
+      - key: ALLOWED_ORIGINS
+        sync: false
+      # Optional: allow Vercel preview URLs too, e.g.
+      # https://your-app-.*\.vercel\.app
+      - key: ALLOWED_ORIGIN_REGEX
+        sync: false

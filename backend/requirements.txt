@@ -1,0 +1,13 @@
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+python-dotenv>=1.0.0
+
+# Pinned to the exact versions the models in ml/models were pickled with.
+# Bumping these can break joblib.load() (pickle is version-sensitive). If you
+# retrain, regenerate these pins to match your training environment.
+joblib==1.5.3
+scikit-learn==1.6.1
+pandas==2.3.3
+numpy==2.0.2
+scipy==1.13.1
