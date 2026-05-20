@@ -1,20 +1,24 @@
-version: "3.8"
+# Local-only stack (production deploys to Vercel + Render; see DEPLOY.md).
+#   docker compose up --build
+#   frontend -> http://localhost:3000   backend -> http://localhost:8000/docs
 
 services:
   backend:
-    build: ./backend
+    build:
+      context: .                  # repo root, so the image can bake in ml/models
+      dockerfile: backend/Dockerfile
     ports:
       - "8000:8000"
-    volumes:
-      - ./ml/models:/app/models
     environment:
-      - MODEL_DIR=/app/models
+      - ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        # The browser (not the compose network) calls the API, so use localhost.
+        NEXT_PUBLIC_API_URL: http://localhost:8000
     ports:
       - "3000:3000"
-    environment:
-      - NEXT_PUBLIC_API_URL=http://backend:8000
     depends_on:
       - backend

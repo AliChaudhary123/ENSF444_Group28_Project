@@ -1,0 +1,37 @@
+# Build context is the repo root (see backend/Dockerfile). Keep it lean: the
+# backend image only needs backend/app, backend/requirements.txt, and ml/models.
+
+# Python envs / caches
+.venv/
+**/__pycache__/
+*.pyc
+*.egg-info/
+
+# Frontend (deployed separately on Vercel — not part of the backend image)
+frontend/
+
+# Notebooks and raw data (used for training, not by the API at runtime)
+*.ipynb
+.ipynb_checkpoints/
+data/
+
+# ML training code (the API only needs ml/models, baked in by the Dockerfile)
+ml/src/
+ml/requirements.txt
+
+# Tooling / VCS / misc
+.git/
+.gitignore
+.gitattributes
+.claude/
+cache/
+docker-compose.yml
+README.md
+DEPLOY.md
+.env
+.env.local
+backend/.env
+
+# OS junk
+.DS_Store
+Thumbs.db

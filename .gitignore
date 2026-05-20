@@ -6,8 +6,8 @@ __pycache__/
 .venv/
 *.egg-info/
 
-# ML artifacts (large binary files)
-ml/models/*.pkl
+# ML artifacts: tracked via Git LFS (see .gitattributes) so they ship to the
+# backend host. Do NOT re-ignore these or the deployed API will have no models.
 
 # Node
 frontend/node_modules/
@@ -26,3 +26,6 @@ Thumbs.db
 
 # Cache
 cache/
+
+# Local Claude Code agent state
+.claude/
