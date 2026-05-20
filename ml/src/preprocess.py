@@ -20,6 +20,7 @@ def prepare_regression_data(df: pd.DataFrame):
     feature_cols = ["sector", "community_name", "category", "year", "month", "resident_count"]
     df = df.dropna(subset=feature_cols + ["crime_count"])
     X = df[feature_cols].copy()
+    X["month"] = X["month"].astype(str)  # Keep month as string for regression model
     y = df["crime_count"].values
     return X, y
 
@@ -39,6 +40,7 @@ def prepare_classification_data(df: pd.DataFrame):
     )
     feature_cols = ["sector", "community_name", "resident_count", "year", "month"]
     X = agg[feature_cols].copy()
+    X["month"] = X["month"].astype(str)  # Keep month as string for classification model
     y = agg["risk_level"].values
     return X, y
 
